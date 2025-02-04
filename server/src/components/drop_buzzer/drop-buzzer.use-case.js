@@ -25,8 +25,6 @@ module.exports = class DropBuzzerUseCase {
 
         room.dropBuzzer();
         this.roomRepository.save(room);
-
-        return playerWhoBuzzed;
     }
 
     checkMandatoryFields({ roomId, playerId }) {
