@@ -31,10 +31,6 @@ function isPlayerActive(player: any) {
   return buzzzedStore.playerWhoBuzzed.name === player.name;
 }
 
-function hasPlayerWhoBuzzed() {
-  return buzzzedStore.playerWhoBuzzed.name !== '';
-}
-
 function releaseBuzzer() {
   buzzzedStore.dropBuzzer();
 }
@@ -69,7 +65,7 @@ function playPlayerSound(soundId: number) {
             {{ player.name }}
           </div>
           <div>
-            <button v-if="hasPlayerWhoBuzzed()" @click="releaseBuzzer()">
+            <button v-if="isPlayerActive(player)" @click="releaseBuzzer()">
               <IconTimes />
             </button>
           </div>
