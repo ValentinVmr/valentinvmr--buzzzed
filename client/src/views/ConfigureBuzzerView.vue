@@ -4,19 +4,20 @@ import BuzzzedCarrouselSelect from "@/components/BuzzzedCarrouselSelect.vue";
 import IconSpeaker from "@/components/icons/IconSpeaker.vue";
 import {useBuzzzedStore} from "@/stores/buzzzed";
 import {useSounds} from "@/composables/useSounds";
+import {useAvatars} from "@/composables/useAvatars";
+import {useRouter} from "vue-router";
 
 const userName = ref("");
 const avatar = ref(0);
 const buzzerSound = ref(0);
 const buzzzedStore = useBuzzzedStore();
+const router = useRouter();
+const { avatars } = useAvatars()
+const { sounds } = useSounds();
 
-const avatars = [
-  "little-face-56.png",
-  "spinned-face-56.png",
-  "square-face-56.png",
-]
-
-const { sounds, soundList } = useSounds();
+if (buzzzedStore.roomId === '') {
+  router.push('/');
+}
 
 function handleFormSubmit(e: Event) {
   e.preventDefault();
@@ -54,7 +55,7 @@ function joinRoom() {
   <section class="configure-buzzer">
     <div class="configure-buzzer__container">
       <h1 class="configure-buzzer__container__title">Qui es-tu ?</h1>
-      <form novalidate @submit="handleFormSubmit" class="configure-buzzer__container__form">
+      <form autocomplete="off" novalidate @submit="handleFormSubmit" class="configure-buzzer__container__form">
         <div>
           <input @change="handleUserNameUpdate" id="pseudo" type="text" placeholder="Pseudo"/>
         </div>

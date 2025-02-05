@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { socket } from "@/socket";
+import {defineStore} from "pinia";
+import {socket} from "@/socket";
 import router from "@/router";
 
 export const useBuzzzedStore = defineStore("buzzzed", {
@@ -10,6 +10,7 @@ export const useBuzzzedStore = defineStore("buzzzed", {
     buzzer: { soundId: 0 },
     isBuzzerLocked: false,
     playerWhoBuzzed: { name: '', soundId: -1 },
+    players: [] as any[]
   }),
   actions: {
     bindEvents() {
@@ -46,6 +47,19 @@ export const useBuzzzedStore = defineStore("buzzzed", {
         this.roomId = roomId;
         router.push({ name: 'Host'});
       });
+
+      socket.on('player-joined', (payload: string) => {
+        this.players = JSON.parse(payload) as any[];
+      });
+
+      socket.on('player-left', (payload: string) => {
+        this.players = JSON.parse(payload) as any[];
+      });
+
+      socket.on('game-deleted', () => {
+        this.$reset();
+        router.push({ name: 'Home' });
+      })
     },
 
     checkRoomExists(roomId: string) {
@@ -66,8 +80,8 @@ export const useBuzzzedStore = defineStore("buzzzed", {
       socket.emit("create-room", JSON.stringify({ hostName }));
     },
 
-    dropBuzzer(roomId: string) {
-      socket.emit("drop-buzzer", JSON.stringify({ roomId }));
+    dropBuzzer() {
+      socket.emit("drop-buzzer", JSON.stringify({ roomId: this.roomId }));
     }
   }
 });

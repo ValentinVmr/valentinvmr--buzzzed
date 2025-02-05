@@ -17,7 +17,14 @@ export const useSounds = () => {
     }
   ];
 
+  onMounted(() => {
+    sounds.forEach(sound => {
+      new Audio(`/sounds/${sound.file}`)
+    });
+  });
+
   const soundsRef = ref(sounds);
+
   const soundList = computed(() => sounds.map(sound => sound.name));
   const getSound = (id: number) => sounds[id];
 

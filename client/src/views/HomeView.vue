@@ -8,17 +8,15 @@ const roomCode = ref('')
 const buzzzedStore = useBuzzzedStore();
 
 function handleFormSubmit (e: Event) {
-  e.preventDefault()
-
-  if((e.target as HTMLElement).id === 'join') {
-    buzzzedStore.checkRoomExists(roomCode.value);
-  } else {
-    buzzzedStore.createRoom()
-  }
+  e.preventDefault();
 }
 
 function handleRoomJoin() {
-  buzzzedStore.checkRoomExists(roomCode.value);
+  buzzzedStore.checkRoomExists(roomCode.value.toLowerCase());
+}
+
+function handleCreateRoom() {
+  buzzzedStore.createRoom()
 }
 
 function handleRoomCodeUpdate (event: Event) {
@@ -39,14 +37,14 @@ function handleRoomCodeUpdate (event: Event) {
         Pour commencer, entrez le code de la partie
       </p>
     </div>
-    <form novalidate @submit="handleFormSubmit" class="home__welcome-message__form">
+    <form autocomplete="off" novalidate @submit="handleFormSubmit" class="home__welcome-message__form">
       <div>
-        <input @change="handleRoomCodeUpdate" id="room-code" type="text" placeholder="Code de la partie"/>
+        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" @change="handleRoomCodeUpdate" id="room-code" type="text" placeholder="Code de la partie"/>
         <span v-if="roomDoesNotExists === false" class="error">La salle n'existe pas.</span>
       </div>
       <div class="home__welcome-message__form__buttons">
-        <button id="join" type="submit">Rejoindre</button>
-        <button id="create" type="submit">Ou créer une salle</button>
+        <button id="join" @click="handleRoomJoin()" type="submit">Rejoindre</button>
+        <button id="create" @click="handleCreateRoom()" type="submit">Ou créer une salle</button>
       </div>
     </form>
   </section>

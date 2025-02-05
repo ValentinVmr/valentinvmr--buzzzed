@@ -2,10 +2,16 @@
 import {useBuzzzedStore} from "@/stores/buzzzed";
 import {computed, watch} from "vue";
 import {useSounds} from "@/composables/useSounds";
+import {useRouter} from "vue-router";
 
 const buzzzedStore = useBuzzzedStore();
 const { getSound } = useSounds();
 const playerRef = computed(() => buzzzedStore.playerWhoBuzzed);
+const router = useRouter();
+
+if (buzzzedStore.roomId === '') {
+  router.push('/');
+}
 
 function isMyBuzzerLocked() {
   return buzzzedStore.isBuzzerLocked;
@@ -60,6 +66,7 @@ function playPlayerSound(soundId: number) {
   width: 100%;
   height: 80vh;
   padding: 2rem;
+  touch-action: manipulation;
 
   &__container {
     width: 100%;

@@ -8,6 +8,8 @@ io.on('connection', (socket) => {
     handleMessages(socket);
 });
 
-server.listen(8080, () => {
-    console.log('server running at http://localhost:8080');
+const port = process.env.PORT || 9876;
+
+server.listen(port, () => {
+    console.log('server running at http://localhost:' + port);
 });

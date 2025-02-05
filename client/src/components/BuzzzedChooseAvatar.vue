@@ -2,12 +2,9 @@
 import {ref} from "vue";
 import IconLeftArrow from "@/components/icons/IconLeftArrow.vue";
 import IconRightArrow from "@/components/icons/IconRightArrow.vue";
+import {useAvatars} from "@/composables/useAvatars";
 
-const avatars = [
-  "little-face-56.png",
-  "spinned-face-56.png",
-  "square-face-56.png",
-]
+const { avatars } = useAvatars();
 
 const selectedAvatar = ref(0);
 
@@ -19,7 +16,7 @@ function selectAvatar(index: number) {
 
 function choosePreviousAvatar() {
   if (selectedAvatar.value === 0) {
-    selectAvatar(avatars.length - 1);
+    selectAvatar(avatars.value.length - 1);
   } else {
     selectAvatar(selectedAvatar.value - 1);
   }
@@ -28,7 +25,7 @@ function choosePreviousAvatar() {
 }
 
 function chooseNextAvatar() {
-  selectedAvatar.value = (selectedAvatar.value + 1) % avatars.length;
+  selectedAvatar.value = (selectedAvatar.value + 1) % avatars.value.length;
 
   emitUpdatedAvatar();
 }

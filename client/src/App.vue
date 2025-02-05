@@ -12,11 +12,13 @@ buzzzedStore.bindEvents();
 connectionStore.bindEvents();
 
 connectionStore.connect();
+
+document.title = "Buzzzed";
 </script>
 
 <template>
   <router-view v-slot="{ Component }">
-    <transition name="fade">
+    <transition name="fade" mode="out-in">
       <component :is="Component" />
     </transition>
   </router-view>
@@ -54,6 +56,7 @@ connectionStore.connect();
   align-items: center;
   justify-content: center;
 }
+
 
 .fade-enter-active,
 .fade-leave-active {

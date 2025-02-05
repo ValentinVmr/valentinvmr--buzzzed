@@ -6,7 +6,6 @@ import IconRightArrow from "@/components/icons/IconRightArrow.vue";
 const props = defineProps({
   choices: {
     type: Array as PropType<string[]>,
-    required: true,
     default: [],
   },
 });
