@@ -31,6 +31,10 @@ function isPlayerActive(player: any) {
   return buzzzedStore.playerWhoBuzzed.name === player.name;
 }
 
+function onePlayerBuzzed() {
+  return buzzzedStore.playerWhoBuzzed.name !== '';
+}
+
 function releaseBuzzer() {
   buzzzedStore.dropBuzzer();
 }
@@ -58,16 +62,14 @@ function playPlayerSound(soundId: number) {
 
     <article v-if="hasOnePLayerInRoom()">
       <h1>Joueur.euse.s</h1>
-      <ul>
+      <button v-if="onePlayerBuzzed()" @click="releaseBuzzer()" class="release-buzzer">
+        <IconTimes /> Libérer le buzzer
+      </button>
+      <ul class="player-list">
         <li class="player" :class="{ active: isPlayerActive(player)}" v-for="player in getPlayers()">
           <div class="player-info">
-            <img :src="`/avatars/${getAvatar(player.avatar)}`" alt="Avatar" width="56" height="56"/>
+            <img :src="`/avatars/${getAvatar(player.avatar)}`" alt="Avatar" width="32" height="32"/>
             {{ player.name }}
-          </div>
-          <div>
-            <button v-if="isPlayerActive(player)" @click="releaseBuzzer()">
-              <IconTimes />
-            </button>
           </div>
         </li>
       </ul>
@@ -77,6 +79,25 @@ function playPlayerSound(soundId: number) {
 
 <style scoped lang="scss">
 
+.release-buzzer {
+  background: #d7acac;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: #c03f3f;
+  fill: #c03f3f;
+
+  & > svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 section.host-view {
   display: flex;
   flex-direction: column;
@@ -84,6 +105,13 @@ section.host-view {
 
   h1 {
     margin-bottom: 1rem;
+  }
+
+  .player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style-type: none;
   }
 
   .player {
@@ -119,8 +147,8 @@ section.host-view {
       padding: 1rem;
 
       & > svg {
-        width: 24px;
-        height: 24px;
+        width: 16px;
+        height: 16px;
       }
     }
   }
