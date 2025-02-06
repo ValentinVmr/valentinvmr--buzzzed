@@ -25,14 +25,14 @@ document.title = "Buzzzed";
     </transition>
   </router-view>
   <MadeByHoorah />
-  <notifications :max="2" position="top center" />
+  <notifications classes="notification" :max="2" position="top center" />
 </template>
 
 <style lang="scss">
 @import "assets/fonts";
 @import "assets/_base";
 
-.vue-notification {
+.notification {
   margin-top: 0.25rem;
   font-family: "Hanken Grotesk", Avenir, Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -78,7 +78,6 @@ document.title = "Buzzzed";
   align-items: center;
   justify-content: center;
 }
-
 
 .fade-enter-active,
 .fade-leave-active {
