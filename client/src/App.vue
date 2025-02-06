@@ -2,6 +2,7 @@
 import { socket } from "@/socket";
 import { useConnectionStore } from "@/stores/connection";
 import { useBuzzzedStore } from "@/stores/buzzzed";
+import MadeByHoorah from "@/components/MadeByHoorah.vue";
 
 
 socket.off();
@@ -22,6 +23,7 @@ document.title = "Buzzzed";
       <component :is="Component" />
     </transition>
   </router-view>
+  <MadeByHoorah />
 </template>
 
 <style lang="scss">
