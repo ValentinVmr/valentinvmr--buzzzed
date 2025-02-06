@@ -9,7 +9,7 @@ module.exports = {
     },
     "player": {
         "already-buzzed": "Vous avez déjà appuyé sur le buzzer.",
-        "already-in-room": "Vous êtes déjà dans la salle.",
+        "already-in-room": "Vous êtes déjà dans une salle.",
         "already-in-another-room": "Vous êtes déjà dans une autre salle.",
         "cant-buzz": "Vous ne pouvez pas appuyer sur le buzzer.",
         "must-be-host": "Vous devez être l'hôte de la partie pour faire cela.",

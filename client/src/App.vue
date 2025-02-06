@@ -44,9 +44,16 @@ document.title = "Buzzzed";
   border: none;
   text-align: center;
 
-  &.success{
+  &.success {
     background: var(--DarkMode-Secondary-Box, #252525);
     border: none;
+    text-align: center;
+  }
+
+  &.error {
+    background: var(--DarkMode-Secondary-Box, #252525);
+    border-left: 4px solid red;
+    text-align: center;
   }
 }
 

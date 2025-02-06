@@ -1,6 +1,6 @@
 {
-  "name": "Buzzzed",
-  "version": "1.3.1",
+  "name": "Buzzzed - Client",
+  "version": "1.3.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
