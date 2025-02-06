@@ -1,6 +1,6 @@
 {
-  "name": "Buzzzed - Server",
-  "version": "1.3.2",
+  "name": "buzzzed_server",
+  "version": "1.3.3",
   "description": "Server for the buzzzed application",
   "main": "src/index.js",
   "scripts": {

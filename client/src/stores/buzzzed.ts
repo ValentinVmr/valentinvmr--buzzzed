@@ -5,6 +5,8 @@ import {useNotification} from "@kyvg/vue3-notification";
 
 const notification = useNotification();
 
+const ERROR_NOT_SHOWED = ['player.cant-buzz'];
+
 export const useBuzzzedStore = defineStore("buzzzed", {
   state: () => ({
     roomId: '',
@@ -55,7 +57,7 @@ export const useBuzzzedStore = defineStore("buzzzed", {
         this.roomId = roomId;
 
         notification.notify({
-          text: 'Salle créée',
+          text: 'Salle créée avec succès.',
           type: 'success',
         });
 
@@ -77,6 +79,11 @@ export const useBuzzzedStore = defineStore("buzzzed", {
 
       socket.on('exception', (payload: string) => {
         const { key, message } = JSON.parse(payload);
+
+        if (ERROR_NOT_SHOWED.includes(key)) {
+          return;
+        }
+
         notification.notify({
           text: message,
           type: 'error',
