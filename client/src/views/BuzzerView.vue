@@ -34,10 +34,7 @@ function buzz() {
 }
 
 watch(playerRef, (value, oldValue) => {
-
-  if (buzzzedStore.name !== value.name) {
     playPlayerSound(value.soundId);
-  }
 }, { deep: true });
 
 function playPlayerSound(soundId: number) {
