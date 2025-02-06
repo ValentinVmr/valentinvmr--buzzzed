@@ -1,51 +1,60 @@
 import {defineStore} from "pinia";
 import {socket} from "@/socket";
 import router from "@/router";
+import {useNotification} from "@kyvg/vue3-notification";
+
+const notification = useNotification();
 
 export const useBuzzzedStore = defineStore("buzzzed", {
   state: () => ({
     roomId: '',
     name: '',
     avatar: 0,
-    buzzer: { soundId: 0 },
+    buzzer: {soundId: 0},
     isBuzzerLocked: false,
-    playerWhoBuzzed: { name: '', soundId: -1 },
+    playerWhoBuzzed: {name: '', soundId: -1},
     players: [] as any[]
   }),
   actions: {
     bindEvents() {
       socket.on("room-exists", (payload: string) => {
-        const { exists } = JSON.parse(payload);
+        const {exists} = JSON.parse(payload);
 
         if (exists) {
-          router.push({ name: "ConfigureBuzzer" });
+          router.push({name: "ConfigureBuzzer"});
         }
       });
 
       socket.on('room-joined', () => {
-          router.push({ name: "Buzzer" });
+        router.push({name: "Buzzer"});
       });
 
       socket.on('player-buzzed', (payload: string) => {
-        const { name, soundId } = JSON.parse(payload);
-        this.playerWhoBuzzed = { name, soundId };
+        const {name, soundId} = JSON.parse(payload);
+        this.playerWhoBuzzed = {name, soundId};
         this.isBuzzerLocked = true;
       });
 
       socket.on('you-buzzed', () => {
-        this.playerWhoBuzzed = { name: this.name, soundId: this.buzzer.soundId };
+        this.playerWhoBuzzed = {name: this.name, soundId: this.buzzer.soundId};
         this.isBuzzerLocked = true;
       });
 
       socket.on('drop-buzzer', () => {
         this.isBuzzerLocked = false;
-        this.playerWhoBuzzed = { name: '', soundId: -1 };
+        this.playerWhoBuzzed = {name: '', soundId: -1};
       });
 
       socket.on('room-created', (payload: string) => {
-        const { roomId } = JSON.parse(payload);
+        const {roomId} = JSON.parse(payload);
         this.roomId = roomId;
-        router.push({ name: 'Host'});
+
+        notification.notify({
+          text: 'Salle créée',
+          type: 'success',
+        });
+
+        router.push({name: 'Host'});
       });
 
       socket.on('player-joined', (payload: string) => {
@@ -58,30 +67,30 @@ export const useBuzzzedStore = defineStore("buzzzed", {
 
       socket.on('game-deleted', () => {
         this.$reset();
-        router.push({ name: 'Home' });
+        router.push({name: 'Home'});
       })
     },
 
     checkRoomExists(roomId: string) {
       this.roomId = roomId;
-      socket.emit("room-exists", JSON.stringify({ roomId }));
+      socket.emit("room-exists", JSON.stringify({roomId}));
     },
 
     joinRoom(name: string, avatar: number, buzzer: { soundId: number }) {
-      socket.emit("join-room", JSON.stringify({ roomId: this.roomId, name, avatar, buzzer }));
+      socket.emit("join-room", JSON.stringify({roomId: this.roomId, name, avatar, buzzer}));
     },
 
     buzz() {
-      socket.emit("player-buzzed", JSON.stringify({ roomId: this.roomId }));
+      socket.emit("player-buzzed", JSON.stringify({roomId: this.roomId}));
     },
 
     createRoom() {
       const hostName = Math.random().toString(36).substring(7);
-      socket.emit("create-room", JSON.stringify({ hostName }));
+      socket.emit("create-room", JSON.stringify({hostName}));
     },
 
     dropBuzzer() {
-      socket.emit("drop-buzzer", JSON.stringify({ roomId: this.roomId }));
+      socket.emit("drop-buzzer", JSON.stringify({roomId: this.roomId}));
     }
   }
 });

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {useBuzzzedStore} from "@/stores/buzzzed";
 import IconCopy from "@/components/icons/IconCopy.vue";
+import {useNotification} from "@kyvg/vue3-notification";
 
 const props = defineProps<{
   show: {
@@ -10,6 +11,7 @@ const props = defineProps<{
 }>();
 
 const buzzzedStore = useBuzzzedStore();
+const notification = useNotification();
 
 function getRoomCode() {
   if (!buzzzedStore.roomId) {
@@ -25,6 +27,7 @@ function getRoomCode() {
 
 function copyRoomId() {
   navigator.clipboard.writeText(buzzzedStore.roomId);
+  notification.notify("Code copié dans le presse papier");
 }
 </script>
 

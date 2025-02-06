@@ -3,6 +3,7 @@ import { socket } from "@/socket";
 import { useConnectionStore } from "@/stores/connection";
 import { useBuzzzedStore } from "@/stores/buzzzed";
 import MadeByHoorah from "@/components/MadeByHoorah.vue";
+import {Notifications} from "@kyvg/vue3-notification";
 
 
 socket.off();
@@ -24,11 +25,30 @@ document.title = "Buzzzed";
     </transition>
   </router-view>
   <MadeByHoorah />
+  <notifications position="top center" />
 </template>
 
 <style lang="scss">
 @import "assets/fonts";
 @import "assets/_base";
+
+.vue-notification {
+  margin-top: 0.25rem;
+  font-family: "Hanken Grotesk", Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: white;
+  background: var(--DarkMode-Secondary-Box, #252525);
+  border-radius: 50px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: none;
+  text-align: center;
+
+  &.success{
+    background: var(--DarkMode-Secondary-Box, #252525);
+    border: none;
+  }
+}
 
 :root {
   --DarkMode-Primary-Text: #EAEAEA;
