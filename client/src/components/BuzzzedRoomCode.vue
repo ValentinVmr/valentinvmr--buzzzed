@@ -2,23 +2,20 @@
 import {useBuzzzedStore} from "@/stores/buzzzed";
 import IconCopy from "@/components/icons/IconCopy.vue";
 import {useNotification} from "@kyvg/vue3-notification";
-
-const props = defineProps<{
-  show: {
-    type: Boolean,
-    default: false
-  }
-}>();
+import {ref} from "vue";
+import IconEyeOff from "@/components/icons/IconEyeOff.vue";
+import IconEye from "@/components/icons/IconEye.vue";
 
 const buzzzedStore = useBuzzzedStore();
 const notification = useNotification();
+const isRoomCodeVisible = ref(false);
 
 function getRoomCode() {
   if (!buzzzedStore.roomId) {
     return "";
   }
 
-  if (!props.show) {
+  if (!isRoomCodeVisible.value) {
     return buzzzedStore.roomId.replaceAll(/[a-zA-Z0-9]/g, "•");
   }
 
@@ -29,6 +26,14 @@ function copyRoomId() {
   navigator.clipboard.writeText(buzzzedStore.roomId);
   notification.notify("Code copié dans le presse papier");
 }
+
+function getEyeComponent() {
+  return isRoomCodeVisible.value ? IconEye : IconEyeOff;
+}
+
+function showCode() {
+  isRoomCodeVisible.value = !isRoomCodeVisible.value;
+}
 </script>
 
 <template>
@@ -38,6 +43,7 @@ function copyRoomId() {
     </div>
     <div class="actions">
       <IconCopy @click="copyRoomId()" />
+      <component @click="showCode()" :is="getEyeComponent()" />
     </div>
   </section>
 </template>
@@ -61,8 +67,13 @@ function copyRoomId() {
   }
 
   .actions {
+    display: flex;
+    gap: 0.125rem;
+
     & > svg {
       cursor: pointer;
+      width: 24px;
+      height: 24px;
     }
   }
 }

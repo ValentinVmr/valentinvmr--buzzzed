@@ -25,7 +25,7 @@ document.title = "Buzzzed";
     </transition>
   </router-view>
   <MadeByHoorah />
-  <notifications max="2" position="top center" />
+  <notifications :max="2" position="top center" />
 </template>
 
 <style lang="scss">
