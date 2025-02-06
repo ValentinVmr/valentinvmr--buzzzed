@@ -1,5 +1,7 @@
 const {RemovePlayerUseCase} = require('../../components/remove_player');
 const SocketMessages = require('../socket-messages');
+const useExceptionHandler = require("../../composables/useExceptionHandler");
+const {emitException} = useExceptionHandler();
 
 function createResponse(players = []) {
     if (players.length === 0) {
@@ -20,6 +22,6 @@ module.exports = (socket) => {
             socket.to(roomId).emit(SocketMessages.PLAYER_LEFT, response);
         }
     } catch (e) {
-        console.error(e);
+        emitException(socket, e);
     }
 }

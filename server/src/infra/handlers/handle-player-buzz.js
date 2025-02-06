@@ -1,10 +1,12 @@
-const { PlayerBuzzUseCase } = require("../../components/player_buzz");
+const {PlayerBuzzUseCase} = require("../../components/player_buzz");
 const SocketMessages = require("../socket-messages");
+const useExceptionHandler = require("../../composables/useExceptionHandler");
+const {emitException} = useExceptionHandler();
 
 module.exports = (socket, payload) => {
     try {
-        const { roomId } = JSON.parse(payload);
-        const player = PlayerBuzzUseCase.execute({ roomId, playerId: socket.id });
+        const {roomId} = JSON.parse(payload);
+        const player = PlayerBuzzUseCase.execute({roomId, playerId: socket.id});
 
         const response = {
             name: player.name,
@@ -14,6 +16,6 @@ module.exports = (socket, payload) => {
         socket.to(roomId).emit(SocketMessages.PLAYER_BUZZED, JSON.stringify(response));
         socket.emit(SocketMessages.YOU_BUZZED);
     } catch (e) {
-        console.error(e);
+        emitException(socket, e);
     }
 }

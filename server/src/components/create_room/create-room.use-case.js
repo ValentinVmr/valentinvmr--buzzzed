@@ -10,15 +10,15 @@ module.exports = class CreateRoomUseCase {
 
     execute({ hostId, hostName }) {
         if(!hostId) {
-            throw new Error("Host id is required");
+            throw new Error("host.id.required");
         }
 
         if(!hostName) {
-            throw new Error("Host name is required");
+            throw new Error("host.name.required");
         }
 
         if (this.playersInRoomRepository.playerIsInRoom(hostId)) {
-            throw new Error("Player is already in a room");
+            throw new Error("player.already-in-room");
         }
 
         let roomId;

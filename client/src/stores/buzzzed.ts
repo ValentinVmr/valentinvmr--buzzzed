@@ -22,6 +22,11 @@ export const useBuzzzedStore = defineStore("buzzzed", {
 
         if (exists) {
           router.push({name: "ConfigureBuzzer"});
+        } else {
+          notification.notify({
+            text: 'La salle n\'existe pas',
+            type: 'error',
+          });
         }
       });
 
@@ -68,7 +73,15 @@ export const useBuzzzedStore = defineStore("buzzzed", {
       socket.on('game-deleted', () => {
         this.$reset();
         router.push({name: 'Home'});
-      })
+      });
+
+      socket.on('exception', (payload: string) => {
+        const { key, message } = JSON.parse(payload);
+        notification.notify({
+          text: message,
+          type: 'error',
+        });
+      });
     },
 
     checkRoomExists(roomId: string) {

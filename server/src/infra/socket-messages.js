@@ -10,4 +10,5 @@ module.exports = {
     GAME_DELETED: "game-deleted",
     PLAYER_LEFT: "player-left",
     DISCONNECT: "disconnect",
+    EXCEPTION: "exception"
 }

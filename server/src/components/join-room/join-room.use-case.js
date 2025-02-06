@@ -15,19 +15,19 @@ module.exports = class JoinRoomUseCase {
         const room = this.roomRepository.get(roomId);
 
         if (!room) {
-            throw new Error("Room not found");
+            throw new Error("room.not-found");
         }
 
         if (room.isPlayerHost(player)) {
-            throw new Error("Player is host");
+            throw new Error("player.cannot-be-host");
         }
 
         if (room.playerIsAlreadyInRoom(player)) {
-            throw new Error("Player is already in room");
+            throw new Error("player.already-in-room");
         }
 
         if(this.playersInRoomRepository.playerIsInRoom(playerId)) {
-            throw new Error("Player is already in another room");
+            throw new Error("player.already-in-another-room");
         }
 
         room.addPlayer(player);
@@ -40,23 +40,23 @@ module.exports = class JoinRoomUseCase {
 
     checkMandatoryFields({ roomId, name, avatar, buzzer }) {
         if (roomId == null) {
-            throw new Error("Room id is required");
+            throw new Error("room.id.required");
         }
 
         if (name == null) {
-            throw new Error("Player name is required");
+            throw new Error("player.name.required");
         }
 
         if (avatar == null) {
-            throw new Error("Player avatar is required");
+            throw new Error("player.avatar.required");
         }
 
         if (buzzer == null) {
-            throw new Error("Player buzzer is required");
+            throw new Error("player.buzzer.required");
         }
 
         if (buzzer.soundId == null) {
-            throw new Error("Player buzzer sound id is required");
+            throw new Error("player.buzzer.sound-id.required");
         }
     }
 }

@@ -10,17 +10,17 @@ module.exports = class DropBuzzerUseCase {
         const room = this.roomRepository.get(roomId);
 
         if (!room) {
-            throw new Error("Room not found");
+            throw new Error("room.not-found");
         }
 
         if (!room.isPlayerHost(playerId)) {
-            throw new Error("Player is not host");
+            throw new Error("player.must-be-host");
         }
 
         const playerWhoBuzzed = room.getPlayerWhoBuzzed();
 
         if (!playerWhoBuzzed) {
-            throw new Error("No player has buzzed");
+            throw new Error("player.nobody-buzzed");
         }
 
         room.dropBuzzer();
@@ -29,11 +29,11 @@ module.exports = class DropBuzzerUseCase {
 
     checkMandatoryFields({ roomId, playerId }) {
         if (roomId == null) {
-            throw new Error("Room id is required");
+            throw new Error("room.id.required");
         }
 
         if (playerId == null) {
-            throw new Error("Player id is required");
+            throw new Error("player.id.required");
         }
     }
 }

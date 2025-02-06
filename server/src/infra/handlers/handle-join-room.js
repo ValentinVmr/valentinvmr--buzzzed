@@ -1,5 +1,8 @@
 const {JoinRoomUseCase} = require('../../components/join-room');
 const SocketMessages = require('../socket-messages');
+const useExceptionHandler = require("../../composables/useExceptionHandler");
+
+const {emitException} = useExceptionHandler();
 
 function createResponse(players = []) {
     if (players.length === 0) {
@@ -22,6 +25,6 @@ module.exports = (socket, payload) => {
         socket.emit(SocketMessages.ROOM_JOINED, response);
 
     } catch (e) {
-        console.error(e);
+        emitException(socket, e);
     }
 }

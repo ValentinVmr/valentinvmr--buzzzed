@@ -9,7 +9,7 @@ module.exports = class RemovePlayerUseCase {
         const roomId = this.playersInRoomRepository.getRoom(playerId);
 
         if (!roomId) {
-            throw new Error("Player not found");
+            throw new Error("player.not-found");
         }
 
         const room = this.roomRepository.get(roomId);
