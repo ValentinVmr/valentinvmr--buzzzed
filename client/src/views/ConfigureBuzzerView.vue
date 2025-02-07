@@ -13,7 +13,7 @@ const buzzerSound = ref(0);
 const buzzzedStore = useBuzzzedStore();
 const router = useRouter();
 const { avatars } = useAvatars()
-const { sounds } = useSounds();
+const { sounds, getSound } = useSounds();
 
 if (buzzzedStore.roomId === '') {
   router.push('/');
@@ -49,6 +49,12 @@ function joinRoom() {
     );
   }
 }
+
+function playSound() {
+  const soundFile = getSound(buzzerSound.value)?.file;
+  const audio = new Audio(`/sounds/${soundFile}`);
+  audio.play().catch(console.error);
+}
 </script>
 
 <template>
@@ -67,7 +73,7 @@ function joinRoom() {
         <div>
           <buzzzed-carrousel-select @choice:update="handleBuzzerSoundUpdate" :choices="sounds">
             <div class="selected-sound">
-              <icon-speaker/>
+              <icon-speaker class="speaker-icon" @click="playSound()"/>
               {{ sounds[buzzerSound].name }}
             </div>
           </buzzzed-carrousel-select>
@@ -86,6 +92,10 @@ function joinRoom() {
   color: #e83f3f;
   font-weight: normal;
   margin-top: 0.25rem;
+}
+
+.speaker-icon {
+  cursor: pointer;
 }
 
 .configure-buzzer {
