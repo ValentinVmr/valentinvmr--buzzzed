@@ -24,7 +24,10 @@ function getRoomCode() {
 
 function copyRoomId() {
   navigator.clipboard.writeText(buzzzedStore.roomId);
-  notification.notify("Code copié dans le presse papier");
+  notification.notify({
+    title: "Code copié dans le presse papier",
+    type: "success",
+  });
 }
 
 function getEyeComponent() {
