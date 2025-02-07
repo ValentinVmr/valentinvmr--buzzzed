@@ -24,7 +24,9 @@ function handleRoomCodeUpdate (event: Event) {
   roomCode.value = target.value
 }
 
-
+if (buzzzedStore.roomId !== '') {
+  buzzzedStore.leaveRoom();
+}
 </script>
 
 <template>

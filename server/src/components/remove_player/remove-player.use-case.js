@@ -25,9 +25,9 @@ module.exports = class RemovePlayerUseCase {
         } else {
             room.removePlayer(playerId);
             this.roomRepository.save(room);
-            this.playersInRoomRepository.delete(playerId);
         }
 
+        this.playersInRoomRepository.delete(playerId);
         return { roomId: roomId, isGameDeleted, players: room.players }
     }
 }

@@ -111,6 +111,12 @@ export const useBuzzzedStore = defineStore("buzzzed", {
 
     dropBuzzer() {
       socket.emit("drop-buzzer", JSON.stringify({roomId: this.roomId}));
+    },
+
+    leaveRoom() {
+      socket.emit("player-left", "");
+      this.$reset();
+      router.push({name: 'Home'});
     }
   }
 });

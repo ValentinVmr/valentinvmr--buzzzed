@@ -5,7 +5,7 @@ import {useBuzzzedStore} from "@/stores/buzzzed";
 import {useAvatars} from "@/composables/useAvatars";
 import IconTimes from "@/components/icons/IconTimes.vue";
 import {useSounds} from "@/composables/useSounds";
-import {computed, watch} from "vue";
+import {computed, onBeforeUnmount, onUnmounted, watch} from "vue";
 import {useRouter} from "vue-router";
 
 
@@ -51,6 +51,8 @@ function playPlayerSound(soundId: number) {
   const audio = new Audio(`/sounds/${sound.file}`);
   audio.play().catch(console.error);
 }
+
+onBeforeUnmount(() => buzzzedStore.leaveRoom());
 </script>
 
 <template>

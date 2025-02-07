@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {useBuzzzedStore} from "@/stores/buzzzed";
-import {computed, watch} from "vue";
+import {computed, onBeforeUnmount, onUnmounted, watch} from "vue";
 import {useSounds} from "@/composables/useSounds";
 import {useRouter} from "vue-router";
 
@@ -42,6 +42,8 @@ function playPlayerSound(soundId: number) {
   const audio = new Audio(`/sounds/${sound.file}`);
   audio.play().catch(console.error);
 }
+
+onBeforeUnmount(() => buzzzedStore.leaveRoom());
 </script>
 
 <template>
