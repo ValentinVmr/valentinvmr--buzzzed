@@ -57,7 +57,7 @@ function joinRoom() {
       <h1 class="configure-buzzer__container__title">Qui es-tu ?</h1>
       <form autocomplete="off" novalidate @submit="handleFormSubmit" class="configure-buzzer__container__form">
         <div>
-          <input @change="handleUserNameUpdate" id="pseudo" type="text" placeholder="Pseudo"/>
+          <input @input="handleUserNameUpdate" id="pseudo" type="text" placeholder="Pseudo"/>
         </div>
         <div>
           <buzzzed-carrousel-select @choice:update="handleAvatarUpdate" :choices="avatars">

@@ -41,11 +41,11 @@ if (buzzzedStore.roomId !== '') {
     </div>
     <form autocomplete="off" novalidate @submit="handleFormSubmit" class="home__welcome-message__form">
       <div>
-        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" @change="handleRoomCodeUpdate" id="room-code" type="text" placeholder="Code de la partie"/>
+        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" @input="handleRoomCodeUpdate" id="room-code" type="text" placeholder="Code de la partie"/>
         <span v-if="roomDoesNotExists === false" class="error">La salle n'existe pas.</span>
       </div>
       <div class="home__welcome-message__form__buttons">
-        <button id="join" @click="handleRoomJoin()" type="submit">Rejoindre</button>
+        <button id="join" @click="handleRoomJoin()" type="submit" :disabled="roomCode === ''">Rejoindre</button>
         <button id="create" @click="handleCreateRoom()" type="submit">Ou créer une salle</button>
       </div>
     </form>

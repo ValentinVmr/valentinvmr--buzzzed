@@ -8,10 +8,15 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  background: var(--LightMode-Tertiary-Box, #EAEAEA);
+  background: #9747FF;
+  color: white;
+
+  &:disabled {
+    background: var(--LightMode-Tertiary-Box, #EAEAEA);
+  }
 
   &:hover {
-    background: #BBBBBB;
+    background: #7e37dc;
   }
 }
 
