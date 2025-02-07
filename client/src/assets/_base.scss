@@ -14,6 +14,11 @@ button {
   &:disabled {
     background: var(--LightMode-Tertiary-Box, #EAEAEA);
     color: grey;
+
+    &:hover {
+      background: var(--LightMode-Tertiary-Box, #EAEAEA);
+      color: grey;
+    }
   }
 
   &:hover {
