@@ -1,7 +1,8 @@
 module.exports = class Buzzer {
     static BUZZER_DISABLE_TIME = 2000;
 
-    constructor({ soundId }) {
+    constructor({ id, soundId }) {
+        this.id = id;
         this.soundId = soundId;
         this.lastBuzzedAt = null;
     }

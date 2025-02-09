@@ -45,7 +45,7 @@ function joinRoom() {
     buzzzedStore.joinRoom(
       userName.value,
       avatar.value,
-      {soundId: buzzerSound.value}
+      {soundId: buzzerSound.value, id: Math.random().toString(36).slice(7)}
     );
   }
 }

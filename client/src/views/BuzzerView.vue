@@ -18,7 +18,7 @@ function isMyBuzzerLocked() {
 }
 
 function isMyBuzzerSelected() {
-  return buzzzedStore.name === buzzzedStore.playerWhoBuzzed.name;
+  return buzzzedStore.buzzer.id === buzzzedStore.playerWhoBuzzed.buzzerId;
 }
 
 function getBuzzerText() {
@@ -33,8 +33,14 @@ function buzz() {
   }
 }
 
+function onePlayerBuzzed() {
+  return buzzzedStore.playerWhoBuzzed.buzzerId !== '';
+}
+
 watch(playerRef, (value, oldValue) => {
+  if (onePlayerBuzzed()) {
     playPlayerSound(value.soundId);
+  }
 }, { deep: true });
 
 function playPlayerSound(soundId: number) {

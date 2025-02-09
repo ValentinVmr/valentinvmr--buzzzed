@@ -10,7 +10,8 @@ module.exports = (socket, payload) => {
 
         const response = {
             name: player.name,
-            soundId: player.buzzer.soundId
+            soundId: player.buzzer.soundId,
+            buzzerId: player.buzzer.id
         }
 
         socket.to(roomId).emit(SocketMessages.PLAYER_BUZZED, JSON.stringify(response));

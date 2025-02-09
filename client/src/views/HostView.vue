@@ -28,11 +28,12 @@ function hasOnePLayerInRoom() {
 }
 
 function isPlayerActive(player: any) {
-  return buzzzedStore.playerWhoBuzzed.name === player.name;
+  console.log(player.buzzerId, buzzzedStore.playerWhoBuzzed.buzzerId);
+  return buzzzedStore.playerWhoBuzzed.buzzerId === player.buzzer.id;
 }
 
 function onePlayerBuzzed() {
-  return buzzzedStore.playerWhoBuzzed.name !== '';
+  return buzzzedStore.playerWhoBuzzed.buzzerId !== '';
 }
 
 function releaseBuzzer() {
@@ -41,7 +42,7 @@ function releaseBuzzer() {
 
 watch(playerRef, (value, oldValue) => {
 
-  if (buzzzedStore.name !== value.name) {
+  if (onePlayerBuzzed()) {
     playPlayerSound(value.soundId);
   }
 }, { deep: true });

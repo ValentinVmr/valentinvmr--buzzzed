@@ -10,7 +10,7 @@ module.exports = class JoinRoomUseCase {
     execute({ roomId, playerId, name, avatar, buzzer }) {
         this.checkMandatoryFields({ roomId, name, avatar, buzzer });
 
-        const createdBuzzer = new Buzzer({ soundId: buzzer.soundId });
+        const createdBuzzer = new Buzzer({ soundId: buzzer.soundId, id: buzzer.id });
         const player = new Player({ id: playerId, name, avatar, buzzer: createdBuzzer });
         const room = this.roomRepository.get(roomId);
 
