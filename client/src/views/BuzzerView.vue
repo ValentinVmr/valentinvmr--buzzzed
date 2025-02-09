@@ -3,6 +3,7 @@ import {useBuzzzedStore} from "@/stores/buzzzed";
 import {computed, onBeforeUnmount, onUnmounted, watch} from "vue";
 import {useSounds} from "@/composables/useSounds";
 import {useRouter} from "vue-router";
+import IconLeave from "@/components/icons/IconLeave.vue";
 
 const buzzzedStore = useBuzzzedStore();
 const { getSound } = useSounds();
@@ -54,6 +55,9 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 
 <template>
   <section class="buzzer">
+    <nav class="buzzer-nav">
+      <button @click="buzzzedStore.leaveRoom()"><IconLeave class="icon white-icon" /></button>
+    </nav>
     <button class="buzzer__container"
             @click="buzz"
             :disabled="isMyBuzzerLocked()"
@@ -66,6 +70,34 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 </template>
 
 <style lang="scss" scoped>
+.buzzer-nav {
+  position: fixed;
+  max-width: 320px;
+  top: 1rem;;
+  left: calc(50% - 320px / 2);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  & > button {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    background: none;
+    border: none;
+    margin: initial;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.white-icon {
+  fill: white;
+}
+
 .buzzer {
   max-width: 320px;
   width: 100%;

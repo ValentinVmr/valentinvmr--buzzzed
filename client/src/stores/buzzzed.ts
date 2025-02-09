@@ -117,9 +117,11 @@ export const useBuzzzedStore = defineStore('buzzzed', {
     },
 
     leaveRoom() {
-      socket.emit('player-left', "");
-      this.$reset();
-      router.push({name: 'Home'});
+      if (this.roomId) {
+        socket.emit('player-left');
+        this.$reset();
+        router.push({name: 'Home'});
+      }
     }
   }
 });

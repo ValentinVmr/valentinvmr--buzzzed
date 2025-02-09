@@ -7,6 +7,7 @@ import IconTimes from "@/components/icons/IconTimes.vue";
 import {useSounds} from "@/composables/useSounds";
 import {computed, onBeforeUnmount, onUnmounted, watch} from "vue";
 import {useRouter} from "vue-router";
+import IconLeave from "@/components/icons/IconLeave.vue";
 
 
 const buzzzedStore = useBuzzzedStore();
@@ -58,6 +59,10 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 
 <template>
   <section class="host-view">
+    <nav class="host-nav">
+      <button @click="buzzzedStore.leaveRoom()"><IconLeave class="icon white-icon" /></button>
+    </nav>
+
     <article>
       <h1>ID de la salle</h1>
       <buzzzed-room-code/>
@@ -81,6 +86,34 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 </template>
 
 <style scoped lang="scss">
+
+.host-nav {
+  position: fixed;
+  max-width: 320px;
+  top: 1rem;;
+  left: calc(50% - 320px / 2);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  & > button {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    background: none;
+    border: none;
+    margin: initial;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.white-icon {
+  fill: white;
+}
 
 .release-buzzer {
   background: #d7acac;
