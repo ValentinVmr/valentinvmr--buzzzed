@@ -115,6 +115,8 @@ section.host-view {
     flex-direction: column;
     gap: 0.5rem;
     list-style-type: none;
+    max-height: calc(64px * 3 + 2rem * 2);
+    overflow-x: auto;
   }
 
   .player {
@@ -136,9 +138,14 @@ section.host-view {
       border-radius: 50%;
     }
 
+    &:not(.active) {
+      order: 1;
+    }
+
     &.active {
       background: #9747FF;
       color: white;
+      order: 0;
     }
 
     button {
