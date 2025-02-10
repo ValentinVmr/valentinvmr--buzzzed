@@ -72,9 +72,8 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 <style lang="scss" scoped>
 .buzzer-nav {
   position: fixed;
-  max-width: 320px;
   top: 1rem;;
-  left: calc(50% - 320px / 2);
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;

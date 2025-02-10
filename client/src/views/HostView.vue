@@ -89,7 +89,6 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 
 .host-nav {
   position: fixed;
-  max-width: 320px;
   top: 1rem;;
   left: calc(50% - 320px / 2);
   width: 100%;
