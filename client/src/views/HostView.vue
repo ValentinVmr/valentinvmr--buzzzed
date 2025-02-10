@@ -89,8 +89,8 @@ onBeforeUnmount(() => buzzzedStore.leaveRoom());
 
 .host-nav {
   position: fixed;
-  top: 1rem;;
-  left: calc(50% - 320px / 2);
+  top: 1rem;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -168,6 +168,7 @@ section.host-view {
 
     img {
       border-radius: 50%;
+      border: 2px solid white;
     }
 
     &:not(.active) {

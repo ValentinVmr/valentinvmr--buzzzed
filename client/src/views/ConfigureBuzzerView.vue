@@ -67,7 +67,7 @@ function playSound() {
         </div>
         <div>
           <buzzzed-carrousel-select @choice:update="handleAvatarUpdate" :choices="avatars">
-            <img :src="`/avatars/${avatars[avatar]}`" alt="Avatar" width="56" height="56"/>
+            <img class="current-avatar" :src="`/avatars/${avatars[avatar]}`" alt="Avatar" width="56" height="56"/>
           </buzzzed-carrousel-select>
         </div>
         <div>
@@ -92,6 +92,11 @@ function playSound() {
   color: #e83f3f;
   font-weight: normal;
   margin-top: 0.25rem;
+}
+
+.current-avatar {
+  border-radius: 50%;
+  border: 2px solid white;
 }
 
 .speaker-icon {

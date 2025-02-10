@@ -8,12 +8,44 @@ interface Sound {
 export const useSounds = () => {
   const sounds: Sound[] = [
     {
-      name: "Whooooooo !",
+      name: "Whoooo",
       file: "whoooo.ogg",
     },
     {
-      name: "Fart noise",
-      file: "fart.ogg",
+      name: "Coin",
+      file: "duck.ogg",
+    },
+    {
+      name: "Ding",
+      file: "bellding.ogg",
+    },
+    {
+      name: "Classique",
+      file: "classic.ogg",
+    },
+    {
+      name: "Bonk",
+      file: "bonk.ogg",
+    },
+    {
+      name: "Miaou",
+      file: "meow.ogg",
+    },
+    {
+      name: "Bruh",
+      file: "bruh.ogg",
+    },
+    {
+      name: "OIIA",
+      file: "oiia.ogg",
+    },
+    {
+      name: "Steve oof",
+      file: "classic_hurt.ogg",
+    },
+    {
+      name: "Villageois Minecraft",
+      file: "minecraft-villager.ogg",
     }
   ];
 
